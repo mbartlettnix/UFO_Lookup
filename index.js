@@ -13,30 +13,31 @@ var filteredUFO = dataSet;
 function renderTable() {
   $tbody.innerHTML = "";
   for (var i = 0; i < filteredUFO.length; i++) {
-    // Get get the current address object and its fields
-    var address = filteredUFO[i];
-    var fields = Object.keys(address);
+    
+    // Get get the current sighting object and its fields
+    var sighting = filteredUFO[i];
+    var fields = Object.keys(sighting);
     // Create a new row in the tbody, set the index to be i + startingIndex
     var $row = $tbody.insertRow(i);
     for (var j = 0; j < fields.length; j++) {
       // For every field in the address object, create a new cell at set its inner text to be the current value at the current address's field
       var field = fields[j];
       var $cell = $row.insertCell(j);
-      $cell.innerText = address[field];
+      $cell.innerText = sighting[field];
     }
   }
 }
 
 function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
-  var filterState = $dateInput.value.trim().toLowerCase();
+  var filterDate = $dateInput.value.trim();
 
   // Set filteredUFO to an array of all addresses whose "state" matches the filter
-  filteredUFO = dataSet.filter(function(address) {
-    var addressState = address.state.toLowerCase();
+  filteredUFO = dataSet.filter(function(sighting) {
+    var sightingDate = sighting.datetime;
 
     // If true, add the address to the filteredUFO, otherwise don't add it to filteredUFO
-    return addressState === filterState;
+    return sightingDate === filterDate;
   });
   renderTable();
 }
