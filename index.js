@@ -1,20 +1,20 @@
 // Get references to the tbody element, input field and button
 var $tbody = document.querySelector("tbody");
-var $stateInput = document.querySelector("#state");
+var $dateInput = document.querySelector("#datetime");
 var $searchBtn = document.querySelector("#search");
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
 
-// Set filteredAddresses to addressData initially
-var filteredAddresses = addressData;
+// Set filteredUFO to addressData initially
+var filteredUFO = dataSet;
 
-// renderTable renders the filteredAddresses to the tbody
+// renderTable renders the filteredUFO to the tbody
 function renderTable() {
   $tbody.innerHTML = "";
-  for (var i = 0; i < filteredAddresses.length; i++) {
+  for (var i = 0; i < filteredUFO.length; i++) {
     // Get get the current address object and its fields
-    var address = filteredAddresses[i];
+    var address = filteredUFO[i];
     var fields = Object.keys(address);
     // Create a new row in the tbody, set the index to be i + startingIndex
     var $row = $tbody.insertRow(i);
@@ -29,13 +29,13 @@ function renderTable() {
 
 function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
-  var filterState = $stateInput.value.trim().toLowerCase();
+  var filterState = $dateInput.value.trim().toLowerCase();
 
-  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
-  filteredAddresses = addressData.filter(function(address) {
+  // Set filteredUFO to an array of all addresses whose "state" matches the filter
+  filteredUFO = dataSet.filter(function(address) {
     var addressState = address.state.toLowerCase();
 
-    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+    // If true, add the address to the filteredUFO, otherwise don't add it to filteredUFO
     return addressState === filterState;
   });
   renderTable();
