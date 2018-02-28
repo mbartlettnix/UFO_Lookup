@@ -1,6 +1,7 @@
 // Get references to the tbody element, input field and button
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#datetime");
+var $stateInput = document.querySelector("#state")
 var $searchBtn = document.querySelector("#search");
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
@@ -31,13 +32,14 @@ function renderTable() {
 function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
   var filterDate = $dateInput.value.trim();
-
-  // Set filteredUFO to an array of all addresses whose "state" matches the filter
+  var filterState = $stateInput.value.trim().toLowerCase();
+  // Set filteredUFO to an array of all siightings with dates that matches the filter
   filteredUFO = dataSet.filter(function(sighting) {
     var sightingDate = sighting.datetime;
-
-    // If true, add the address to the filteredUFO, otherwise don't add it to filteredUFO
-    return sightingDate === filterDate;
+    var sightingState = sighting.state;
+    // If true, add the date to the filteredUFO, otherwise don't add it to filteredUFO
+    return sightingDate === filterDate 
+    && sightingState === filterState;
   });
   renderTable();
 }
