@@ -35,19 +35,24 @@ function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
   var filterDate = $dateInput.value.trim();
   var filterState = $stateInput.value.trim().toLowerCase();
-  
-  if (filterDate.length === 0){
-    filteredUFO = dataSet
-  }
-  else {
+
+  if (filterDate.length != 0){
     filteredUFO = dataSet.filter(function(sighting) {
       var sightingDate = sighting.datetime;
-      
-      // If true, add the date to the filteredUFO, otherwise don't add it to filteredUFO
-      return 
-      sightingDate === filterDate ;
-      console.log(filterDate);
-    });
+       return sightingDate === filterDate;
+         });
+  }
+  else {
+    filteredUFO = dataSet
+  }
+  if (filterState.length != 0){
+    filteredUFO = filteredUFO.filter(function(sighting) {
+      var sightingState = sighting.state;
+       return sightingState === filterState;
+         });
+  }
+  else {
+    filteredUFO = filteredUFO
   }
   renderTable();
 }
