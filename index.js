@@ -13,6 +13,8 @@ var filteredUFO = dataSet;
 // renderTable renders the filteredUFO to the tbody
 function renderTable() {
   $tbody.innerHTML = "";
+  console.log("render is happening")
+
   for (var i = 0; i < filteredUFO.length; i++) {
     
     // Get get the current sighting object and its fields
@@ -33,14 +35,20 @@ function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
   var filterDate = $dateInput.value.trim();
   var filterState = $stateInput.value.trim().toLowerCase();
-  // Set filteredUFO to an array of all siightings with dates that matches the filter
-  filteredUFO = dataSet.filter(function(sighting) {
-    var sightingDate = sighting.datetime;
-    var sightingState = sighting.state;
-    // If true, add the date to the filteredUFO, otherwise don't add it to filteredUFO
-    return sightingDate === filterDate 
-    && sightingState === filterState;
-  });
+  
+  if (filterDate.length === 0){
+    filteredUFO = dataSet
+  }
+  else {
+    filteredUFO = dataSet.filter(function(sighting) {
+      var sightingDate = sighting.datetime;
+      
+      // If true, add the date to the filteredUFO, otherwise don't add it to filteredUFO
+      return 
+      sightingDate === filterDate ;
+      console.log(filterDate);
+    });
+  }
   renderTable();
 }
 
